@@ -1,6 +1,6 @@
 {
 	"name": "eslint-plugin-validate-jsx-nesting",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "ESLint Plugin for Validating JSX Nesting",
 	"main": "dist/index.js",
 	"scripts": {
