@@ -1,8 +1,14 @@
 {
 	"name": "eslint-plugin-validate-jsx-nesting",
-	"version": "0.0.6",
 	"description": "ESLint Plugin for Validating JSX Nesting",
+	"version": "0.0.6",
+	"author": "Manan Tank",
 	"main": "dist/index.js",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/MananTank/eslint-plugin-validate-jsx-nesting.git"
+	},
 	"scripts": {
 		"clean": "rimraf dist",
 		"build": "rollup -c",
@@ -24,11 +30,9 @@
 		"jsx validation",
 		"jsx nesting validation"
 	],
-	"author": "Manan Tank",
 	"dependencies": {
 		"validate-html-nesting": "^1.0.2"
 	},
-	"license": "MIT",
 	"devDependencies": {
 		"@types/estree-jsx": "^0.0.2",
 		"@rollup/plugin-commonjs": "^22.0.1",
