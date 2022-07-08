@@ -1,6 +1,6 @@
 import { validJSXNesting } from './rules/validJSXNestings'
 
-exports = {
+export default {
 	rules: {
 		'no-invalid-jsx-nesting': validJSXNesting,
 	},

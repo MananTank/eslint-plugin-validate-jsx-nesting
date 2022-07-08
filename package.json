@@ -1,6 +1,6 @@
 {
 	"name": "eslint-plugin-validate-jsx-nesting",
-	"version": "0.0.2",
+	"version": "0.0.4",
 	"description": "ESLint Plugin for Validating JSX Nesting",
 	"main": "dist/index.js",
 	"scripts": {
@@ -8,8 +8,7 @@
 		"build": "rollup -c",
 		"prettier": "prettier . -w",
 		"test": "jest",
-		"prepublish": "npm run clean && npm run build",
-		"publish:patch": "npm version patch && npm publish --public"
+		"prepublish": "npm run clean && npm run build"
 	},
 	"files": [
 		"README.md",
