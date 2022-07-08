@@ -11,7 +11,7 @@ const tester = new RuleTester({
 	},
 })
 
-tester.run('valid-jsx-nesting', validJSXNesting, {
+tester.run('no-invalid-jsx-nesting', validJSXNesting, {
 	valid: [{ code: '<p> <span> hi </span></p>' }],
 	invalid: [
 		{
