@@ -33,9 +33,9 @@ Add `"eslint-plugin-validate-jsx-nesting"` to the plugins section of your ESLint
 
 Add the `"validate-jsx-nesting/no-invalid-jsx-nesting"` rule in your ESLint config file.
 
-```
+```json
 "rules": {
-		"validate-jsx-nesting/no-invalid-jsx-nesting": "error"
+	"validate-jsx-nesting/no-invalid-jsx-nesting": "error"
 }
 ```
 
