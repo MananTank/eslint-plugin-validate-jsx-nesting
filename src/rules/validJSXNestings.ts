@@ -18,28 +18,26 @@ export const validJSXNesting: Rule.RuleModule = {
 		return {
 			JSXElement(node: any) {
 				const jsxElement = node as JSXElement
-				const parent = node.parent
+				const parent = node.parent as JSXElement
 				const elName = jsxElement.openingElement.name
-				if (elName.type === 'JSXIdentifier') {
-					const elTagName = elName.name
-					if (!isCompName(elTagName)) {
-						if (isJSXElement(parent)) {
-							const parentElName = parent.openingElement.name
-							if (parentElName.type === 'JSXIdentifier') {
-								const parentElTagName = parentElName.name
-								if (!isCompName(parentElTagName)) {
-									if (!isValidHTMLNesting(parentElName.name, elName.name)) {
-										const errorMessage = `Invalid HTML nesting: <${elName.name}> can not be child of <${parentElName.name}>`
-										context.report({
-											node,
-											message: errorMessage,
-										})
-									}
-								}
-							}
-						}
-					}
-				}
+				if (elName.type !== 'JSXIdentifier') return
+
+				const elTagName = elName.name
+				if (isCompName(elTagName)) return
+				if (!isJSXElement(parent)) return
+
+				const parentElName = parent.openingElement.name
+				if (parentElName.type !== 'JSXIdentifier') return
+
+				const parentElTagName = parentElName.name
+				if (isCompName(parentElTagName)) return
+				if (isValidHTMLNesting(parentElName.name, elName.name)) return
+
+				const errorMessage = `Invalid HTML nesting: <${elName.name}> can not be child of <${parentElName.name}>`
+				context.report({
+					node,
+					message: errorMessage,
+				})
 			},
 		}
 	},
