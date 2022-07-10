@@ -13,9 +13,14 @@ const tester = new RuleTester({
 
 tester.run('no-invalid-jsx-nesting', validJSXNesting, {
 	valid: [
-		{ code: '<p> hi </p>' },
-		{ code: '<><p> hi </p><hr/></>' },
-		{ code: '<p><span> hi </span></p>' },
+		{ code: '<p> foo </p>' },
+		{ code: '<> <p> foo </p> <hr/> </>' },
+		{ code: '<p> <span> foo </span> </p>' },
+		{ code: '<> foo </>' },
+		{ code: '<Foo/>' },
+		{ code: '<Foo> <Bar /> </Foo>' },
+		{ code: '<p> <Bar /> </p>' },
+		{ code: '<P> <P /> </P>' },
 	],
 	invalid: [
 		{
@@ -27,7 +32,7 @@ tester.run('no-invalid-jsx-nesting', validJSXNesting, {
 			],
 		},
 		{
-			code: '<p> <p> hi </p></p>',
+			code: '<p> <p> hi </p> </p>',
 			errors: [
 				{
 					message: 'Invalid HTML nesting: <p> can not be child of <p>',

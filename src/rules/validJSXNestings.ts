@@ -1,13 +1,15 @@
 import type { Rule } from 'eslint'
-import type { JSXElement } from 'estree-jsx'
+import type { JSXElement, JSXIdentifier } from 'estree-jsx'
 import { isValidHTMLNesting } from 'validate-html-nesting'
 
-export function isCompName(tag: string) {
-	return tag[0] === tag[0].toUpperCase()
+/** If the name starts with uppercase, it's a component name  */
+export function isCompName(str: string) {
+	return str[0] === str[0].toUpperCase()
 }
 
-function isJSXElement(node: any): node is JSXElement {
-	return node && node.type === 'JSXElement'
+/** node is JSXElement if it's type is JSXElement  */
+export function isJSXElement(node: any): node is JSXElement {
+	return typeof node === 'object' && node !== null && node.type === 'JSXElement'
 }
 
 export const validJSXNesting: Rule.RuleModule = {
@@ -17,26 +19,29 @@ export const validJSXNesting: Rule.RuleModule = {
 	create(context) {
 		return {
 			JSXElement(node: any) {
+				// get node and it's parent
 				const jsxElement = node as JSXElement
 				const parent = node.parent
+
+				// return if node is not a native element
 				const elName = jsxElement.openingElement.name
 				if (elName.type !== 'JSXIdentifier') return
+				if (isCompName(elName.name)) return
 
-				const elTagName = elName.name
-				if (isCompName(elTagName)) return
+				// return if parent is not a native element
 				if (!isJSXElement(parent)) return
-
 				const parentElName = parent.openingElement.name
 				if (parentElName.type !== 'JSXIdentifier') return
+				if (isCompName(parentElName.name)) return
 
-				const parentElTagName = parentElName.name
-				if (isCompName(parentElTagName)) return
+				// if both are native elements, check if the nesting is valid
+				// return if nesting is valid
 				if (isValidHTMLNesting(parentElName.name, elName.name)) return
 
-				const errorMessage = `Invalid HTML nesting: <${elName.name}> can not be child of <${parentElName.name}>`
+				// report error if nesting is invalid
 				context.report({
 					node,
-					message: errorMessage,
+					message: `Invalid HTML nesting: <${elName.name}> can not be child of <${parentElName.name}>`,
 				})
 			},
 		}
