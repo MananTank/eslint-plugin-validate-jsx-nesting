@@ -1,4 +1,4 @@
-import { isCompName } from '../rules/validJSXNestings'
+import { isCompName } from '../rules/noInvalidJSXNesting'
 
 it('works', () => {
 	expect(isCompName('div')).toBe(false)

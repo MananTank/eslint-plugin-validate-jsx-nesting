@@ -12,7 +12,7 @@ export function isJSXElement(node: any): node is JSXElement {
 	return typeof node === 'object' && node !== null && node.type === 'JSXElement'
 }
 
-export const validJSXNesting: Rule.RuleModule = {
+export const noInvalidJSXNesting: Rule.RuleModule = {
 	meta: {
 		type: 'problem',
 	},

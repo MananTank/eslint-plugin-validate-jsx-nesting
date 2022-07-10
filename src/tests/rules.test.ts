@@ -1,5 +1,5 @@
 import { RuleTester } from 'eslint'
-import { validJSXNesting } from './validJSXNestings'
+import { noInvalidJSXNesting } from '../rules/noInvalidJSXNesting'
 
 const tester = new RuleTester({
 	parserOptions: {
@@ -11,7 +11,7 @@ const tester = new RuleTester({
 	},
 })
 
-tester.run('no-invalid-jsx-nesting', validJSXNesting, {
+tester.run('no-invalid-jsx-nesting', noInvalidJSXNesting, {
 	valid: [
 		{ code: '<p> foo </p>' },
 		{ code: '<> <p> foo </p> <hr/> </>' },

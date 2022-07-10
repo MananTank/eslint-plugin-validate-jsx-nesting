@@ -1,4 +1,4 @@
-import { isJSXElement } from '../rules/validJSXNestings'
+import { isJSXElement } from '../rules/noInvalidJSXNesting'
 
 it('works', () => {
 	expect(isJSXElement(null)).toBe(false)
