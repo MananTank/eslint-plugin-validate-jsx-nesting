@@ -18,7 +18,7 @@ export const validJSXNesting: Rule.RuleModule = {
 		return {
 			JSXElement(node: any) {
 				const jsxElement = node as JSXElement
-				const parent = node.parent as JSXElement
+				const parent = node.parent
 				const elName = jsxElement.openingElement.name
 				if (elName.type !== 'JSXIdentifier') return
 
